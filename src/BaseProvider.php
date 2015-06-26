@@ -24,6 +24,8 @@ abstract class BaseProvider {
     {
         try
         {
+            $this->setToken();
+            $this->setUrl();
             $this->setFullPayload($full_payload);
             if($this->token == false)
                 throw new \Exception("Missing your Project TOKEN see readme.md for help");
@@ -78,11 +80,10 @@ abstract class BaseProvider {
         return $this->url;
     }
 
-    /**
-     * @param string $url
-     */
-    public function setUrl($url)
+    public function setUrl($url = false)
     {
+        if($url == false)
+            $url = getenv('INCOMINGS_URL');
         $this->url = $url;
     }
 
@@ -94,14 +95,15 @@ abstract class BaseProvider {
         return $this->token;
     }
 
-    /**
-     * @param mixed $token
-     */
-    public function setToken($token)
+    public function setToken($token = false)
     {
-        $this->token = $token;
-    }
+        if($token == false)
+            $token = getenv('INCOMINGS_TOKEN');
 
+        $this->token = $token;
+
+        return $this->token;
+    }
 
     private function getFullUrl()
     {
