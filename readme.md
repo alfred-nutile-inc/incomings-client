@@ -1,9 +1,14 @@
 # Laravel and Non-Laravel Library To Connect to Incomings Service
 
+![logo](https://dl.dropboxusercontent.com/s/fz0zwwsxawlyj8t/logo_wide.jpeg?dl=0)
+
 ## Install
 
 Composer install
 
+~~~
+composer require alfred-nutile-inc/incomings-client
+~~~
 
 Add to app.php
 
@@ -11,16 +16,16 @@ Add to app.php
 'AlfredNutileInc\Incomings\IncomingsServiceProvider',
 ~~~
 
-
-
-Send in your .env
+Set in your .env
 
 INCOMINGS_URL=http://dev.incomings.io
 
 INCOMINGS_TOKEN=token_of_project
 
 
-## URL
+## Send Data to the Service
+
+### URL
 
 This is the most simple helper. Each project gets on
 
@@ -31,7 +36,7 @@ So you can for example use that on Iron.io as a PUSH queue route since you can h
 Or even on your server setup a cron job to post every minute your server resource status or security status.
 
 
-## Laravel Facade
+### Laravel Facade
 
 Say you are about to send off to a queue
 
@@ -43,12 +48,15 @@ Now
 
 ~~~
 Incomings::send($data);
+
 Queue::push("foo", $data);
 ~~~
 
 
+### Filter
 
-## Filter
+Coming Soon...
 
+### MiddleWare
 
-## MiddleWare
+Coming Soon...
