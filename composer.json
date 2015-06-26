@@ -1,0 +1,29 @@
+{
+  "name": "alfred-nutile-inc/incomings-client",
+  "description": "Connects to incomings.io",
+  "authors": [
+    {
+      "name": "Alfred Nutile Inc",
+      "email": "me@alfrednutile.info"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+  },
+  "require-dev": {
+    "mockery/mockery": "*",
+    "phpunit/phpunit": "~4.0",
+    "fzaninotto/faker": "1.4.0",
+    "symfony/var-dumper": "^2.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "AlfredNutileInc\\Incomings\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php"
+    ]
+  }
+}
