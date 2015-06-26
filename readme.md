@@ -47,7 +47,7 @@ Say you are about to send off to a queue
 Queue::push("foo", $data);
 ~~~
 
-Now
+Now try
 
 ~~~
 Incomings::send($data);
@@ -55,6 +55,11 @@ Incomings::send($data);
 Queue::push("foo", $data);
 ~~~
 
+For the above Facade to work you might have to add
+
+~~~
+use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
+~~~
 
 ### Filter
 
