@@ -50,10 +50,14 @@ Queue::push("foo", $data);
 Now try
 
 ~~~
+$data = ['title' => 'Foo Bar', 'message' => [1,2,3]]
+
 Incomings::send($data);
 
 Queue::push("foo", $data);
 ~~~
+
+
 
 For the above Facade to work you might have to add
 

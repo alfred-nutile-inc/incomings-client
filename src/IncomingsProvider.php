@@ -7,7 +7,7 @@ namespace AlfredNutileInc\Incomings;
 class IncomingsProvider extends BaseProvider
 {
 
-    protected $clean_out = ['PASS', 'KEY', 'SECRET', 'LS_COLORS'];
+    protected $clean_out = ['PASS', 'KEY', 'SECRET', 'LS_COLORS', 'TOKEN'];
     protected $server;
     protected $payload;
 
