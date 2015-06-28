@@ -19,8 +19,10 @@ class IncomingsProvider extends BaseProvider
         $this->sendFullPayload([
                 'headers' => [],
                 'payload' => $this->getPayload(),
-                'server'  => $this->getServer()
+                'server'  => []
         ]);
+
+        //@NOTE removed from above$this->getServer() not worth storing this sensative data
 
         return true;
     }
