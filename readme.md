@@ -2,6 +2,12 @@
 
 ![logo](https://dl.dropboxusercontent.com/s/fz0zwwsxawlyj8t/logo_wide.jpeg?dl=0)
 
+Sign up for the service https://incomings.io
+
+Then setup and start watching your processes come in.
+
+More docs soon...
+
 ## Install
 
 Composer install
