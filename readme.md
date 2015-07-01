@@ -33,7 +33,7 @@ INCOMINGS_TOKEN=token_of_project
 
 ### URL
 
-This is the most simple helper. Each project gets on
+This is the most simple helper. Each project gets one
 
 ![url](https://dl.dropboxusercontent.com/s/7tw1cgu5wvlgz10/Screenshot%202015-06-25%2019.22.04.png?dl=0)
 
