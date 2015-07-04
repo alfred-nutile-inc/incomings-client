@@ -1,12 +1,12 @@
-# Laravel and Non-Laravel Library To Connect to Incomings Service
+# Laravel and Non-Laravel Library To Connect to Incomings.io Service
 
 ![logo](https://dl.dropboxusercontent.com/s/fz0zwwsxawlyj8t/logo_wide.jpeg?dl=0)
 
 Sign up for the service https://incomings.io
 
-Then setup and start watching your processes come in.
+Then setup and start watching your processes come in one place instead of 5+ 
 
-More docs soon...
+Docs below and at https://incomings.io/help
 
 ## Install
 
