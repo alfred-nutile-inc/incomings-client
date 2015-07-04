@@ -116,10 +116,6 @@ For nicer looking data.
 
 ### MiddleWare
 
-Coming Soon...
-
-#### As a short name
-
 ~~~
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
@@ -153,7 +149,52 @@ Route::get('foobar', ['middleware' => 'incomings:My Title', function() {
 
 ### Filter for Laravel 4.2
 
-Coming Soon...
+As above plug in your provider
+
+If you are not using DotEnv as I write about here [https://alfrednutile.info/posts/113](https://alfrednutile.info/posts/113)
+
+Then update your `.env.php` to have your tokens and url
+
+~~~
+<?php
+
+return array(
+    'INCOMINGS_URL' => 'https://incomings.io',
+    'INCOMINGS_TOKEN' => 'foo-bar-foo'
+);
+~~~
+
+Then in your route
+
+~~~
+Route::get('/', ['before' => 'incomings', function()
+{
+	return View::make('hello');
+}]);
+~~~
+
+Finally in your filter file add the following `app/filters.php`
+
+~~~
+
+Route::filter('incomings', function() {
+
+    try
+    {
+        $incomings = new \AlfredNutileInc\Incomings\IncomingsFilter();
+        $incomings->handle(\Illuminate\Support\Facades\Request::instance());
+    }
+    catch(\Exception $e)
+    {
+        Log::error(sprintf("Error with Incomings :( %s", $e->getMessage());
+    }
+
+});
+
+~~~
+
+This will catch any issues and not mess up your application.
+
 
 ### Drupal 8
 

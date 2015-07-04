@@ -24,6 +24,9 @@ abstract class BaseProvider {
 
     public function send($data = [])
     {
+        if(!getenv('INCOMINGS_TOKEN'))
+            return true;
+
         $this->getAndSetServer();
         $this->setPayload($data);
 
@@ -89,26 +92,31 @@ abstract class BaseProvider {
 
     protected function curl_post(array $options = array())
     {
+
         $defaults = array(
             CURLOPT_POST => 1,
             CURLOPT_HEADER => 0,
             CURLOPT_URL => $this->getFullUrl(),
             CURLOPT_FRESH_CONNECT => 1,
             CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_TIMEOUT => 5,
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_FORBID_REUSE => 1,
-            CURLOPT_TIMEOUT => 4,
             CURLOPT_POSTFIELDS => json_encode($this->getFullPayload(), JSON_PRETTY_PRINT)
         );
 
         $ch = curl_init();
+
         curl_setopt_array($ch, ($options + $defaults));
+
         if( ! $result = curl_exec($ch))
         {
             trigger_error(curl_error($ch));
         }
+
         curl_close($ch);
+
         return $result;
     }
 

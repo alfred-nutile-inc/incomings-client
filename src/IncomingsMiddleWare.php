@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\File;
 
 class IncomingsMiddleWare extends BaseProvider {
 
-    protected $title;
+    use RequestTrait;
+
 
     /**
      * Run the request filter.
@@ -53,6 +54,8 @@ class IncomingsMiddleWare extends BaseProvider {
 
     }
 
+
+
     private function makeTitleFromResponse($request, $response)
     {
 
@@ -64,16 +67,6 @@ class IncomingsMiddleWare extends BaseProvider {
         return $this->title;
     }
 
-    private function makeTitle($request)
-    {
-
-        if(!$this->title)
-        {
-            $this->title = sprintf(" IP %s Method %s URL %s", $request->ip(), $request->method(), $request->fullUrl());
-        }
-
-        return $this->title;
-    }
 
     protected function makeMessageFromResponse(Response $response)
     {
@@ -86,13 +79,8 @@ class IncomingsMiddleWare extends BaseProvider {
 
     private function makeMessage($request, $next)
     {
-        $message['header']      = $request->header();
-        $message['ip']          = $request->ip();
-        $message['input']       = $request->all();
-        $message['json']        = $request->json();
-        $message['method']      = $request->method();
-        $message['url']         = $request->fullUrl();
-        $message['server']      = $request->server();
+
+        $message                = $this->makeMessageFromRequest($request);
         $message['next']        = json_encode($next, JSON_PRETTY_PRINT);
 
         return json_encode($message, JSON_PRETTY_PRINT);
