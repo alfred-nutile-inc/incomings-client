@@ -9,11 +9,19 @@ class IncomingsServiceProvider extends ServiceProvider
         $this->app->singleton('incomings', function($app) {
            return new IncomingsProvider();
         });
+
+        $this->app->singleton('incomings_logger', function($app) {
+
+            $incomings = new IncomingsLoggerProvider();
+            $incomings->setLogger($app['log']);
+
+            return $incomings;
+        });
     }
 
     public function providers()
     {
-        return ['incomings'];
+        return ['incomings', 'incomings_logger'];
     }
 
 }

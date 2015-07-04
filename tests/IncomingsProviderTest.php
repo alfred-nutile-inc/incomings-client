@@ -55,6 +55,9 @@ class IncomingsProviderTest extends \TestCase
         $this->assertArrayNotHasKey('ADMIN_PASS', $incoming->getServer());
     }
 
+
+
+
     public function tearDown()
     {
         parent::tearDown();

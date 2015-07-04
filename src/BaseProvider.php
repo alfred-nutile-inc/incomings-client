@@ -9,16 +9,64 @@
 namespace AlfredNutileInc\Incomings;
 
 
-use Illuminate\Support\Facades\Log;
-
 abstract class BaseProvider {
 
+
+    protected $clean_out = ['PASS', 'KEY', 'SECRET', 'LS_COLORS', 'TOKEN'];
+    protected $server;
+    protected $payload;
 
     public $token;
 
     public $url = 'http://dev.incomings.io';
 
     protected $full_payload = [];
+
+    public function send($data = [])
+    {
+        $this->getAndSetServer();
+        $this->setPayload($data);
+
+        $this->sendFullPayload([
+            'headers' => [],
+            'payload' => $this->getPayload(),
+            'server'  => $this->getServer()
+        ]);
+
+
+        return true;
+    }
+
+    public function getServerName()
+    {
+        if(isset($_SERVER['SERVER_NAME']))
+            return $_SERVER['SERVER_NAME'];
+
+        return false;
+    }
+
+    public function getPayload()
+    {
+        return $this->payload;
+    }
+
+    public function setPayload($payload)
+    {
+        $this->payload = $payload;
+    }
+
+    private function inCleaner($key)
+    {
+        foreach($this->clean_out as $item)
+        {
+            if(stripos($key, $item) !== false)
+            {
+                unset($this->server[$key]);
+            }
+        }
+
+        return false;
+    }
 
     public function sendFullPayload($full_payload)
     {
@@ -116,5 +164,28 @@ abstract class BaseProvider {
         return $this->full_payload;
     }
 
+    public function getServer()
+    {
+        return $this->server;
+    }
+
+    public function setServer($server)
+    {
+        $this->server = $server;
+        return $this;
+    }
+
+    private function getAndSetServer()
+    {
+        $this->server['SERVER_NAME'] = $this->getServerName();
+    }
+
+    public function transformServer()
+    {
+        foreach($this->server as $key => $value)
+        {
+            $this->inCleaner($key);
+        }
+    }
 
 }
