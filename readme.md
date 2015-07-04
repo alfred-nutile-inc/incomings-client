@@ -6,7 +6,7 @@ Sign up for the service https://incomings.io
 
 Then setup and start watching your processes come in one place instead of 5 plus places!
 
-![watching](https://incomings.io/images/example.png)
+![watching](https://incomings.io/images/all_the_places.png)
 
 Docs below and at https://incomings.io/help
 
