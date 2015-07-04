@@ -151,13 +151,7 @@ Route::get('foobar', ['middleware' => 'incomings:My Title', function() {
 }]);
 ~~~
 
-
-Finally you can capture the outs as well.
-
-
-As default
-
-### Filter
+### Filter for Laravel 4.2
 
 Coming Soon...
 

@@ -10,6 +10,7 @@ namespace AlfredNutileInc\Incomings;
 
 
 use Closure;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 
 class IncomingsMiddleWare extends BaseProvider {
@@ -52,6 +53,17 @@ class IncomingsMiddleWare extends BaseProvider {
 
     }
 
+    private function makeTitleFromResponse($request, $response)
+    {
+
+        if(!$this->title)
+        {
+            $this->title = sprintf(" of status %s from IP %s", $response->getStatusCode(), $request->ip());
+        }
+
+        return $this->title;
+    }
+
     private function makeTitle($request)
     {
 
@@ -61,6 +73,15 @@ class IncomingsMiddleWare extends BaseProvider {
         }
 
         return $this->title;
+    }
+
+    protected function makeMessageFromResponse(Response $response)
+    {
+        $message['original_content']    = $response->getOriginalContent();
+        $message['content']             = $response->getContent();
+        $message['status_code']         = $response->getStatusCode();
+
+        return json_encode($message, JSON_PRETTY_PRINT);
     }
 
     private function makeMessage($request, $next)
@@ -77,4 +98,16 @@ class IncomingsMiddleWare extends BaseProvider {
         return json_encode($message, JSON_PRETTY_PRINT);
     }
 
+    public function terminate($request, $response)
+    {
+
+        $this->makeTitleFromResponse($request, $response);
+
+        $data['title']      = sprintf("[IncomingsMiddleware] Response %s", $this->title);
+
+        $data['message']    = $this->makeMessageFromResponse($response);
+
+        $this->send($data);
+
+    }
 }
