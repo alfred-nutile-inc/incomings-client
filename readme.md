@@ -141,6 +141,17 @@ Route::get('foobar', ['middleware' => 'incomings', function() {
 
 Then data coming in via POST, GET, etc will be sent to Incomings for a sense of is the data coming into my system correctly etc.
 
+You can pass a title as well
+
+~~~
+Route::get('foobar', ['middleware' => 'incomings:My Title', function() {
+
+    return "Send to incomings!";
+
+}]);
+~~~
+
+
 Finally you can capture the outs as well.
 
 
