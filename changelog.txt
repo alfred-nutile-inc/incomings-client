@@ -1,3 +1,9 @@
+0.0.1
+------
+New url post.incomings.io
+Facades, Logging, Middleware and filters are not in place to use.
+Works on Laravel 4.2 and 5.1
+
 master
 ------
  bump to setup packagist
