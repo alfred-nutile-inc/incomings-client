@@ -26,7 +26,7 @@ Add to app.php
 
 Set in your .env
 
-INCOMINGS_URL=http://dev.incomings.io
+INCOMINGS_URL=http://post.incomings.io
 
 INCOMINGS_TOKEN=token_of_project
 
@@ -161,7 +161,7 @@ Then update your `.env.php` to have your tokens and url
 <?php
 
 return array(
-    'INCOMINGS_URL' => 'https://incomings.io',
+    'INCOMINGS_URL' => 'https://post.incomings.io',
     'INCOMINGS_TOKEN' => 'foo-bar-foo'
 );
 ~~~
