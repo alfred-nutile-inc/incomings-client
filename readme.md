@@ -12,6 +12,8 @@ Docs below and at https://incomings.io/help
 
 ## Install
 
+Tested on Laravel 4.2 and 5.x more platforms to be tested soon.
+
 Composer install
 
 ~~~
