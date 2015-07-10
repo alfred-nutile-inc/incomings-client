@@ -1,14 +1,18 @@
-# Laravel and Non-Laravel Library To Connect to Incomings Service
+# Laravel and Non-Laravel Library To Connect to Incomings.io Service
 
 ![logo](https://dl.dropboxusercontent.com/s/fz0zwwsxawlyj8t/logo_wide.jpeg?dl=0)
 
 Sign up for the service https://incomings.io
 
-Then setup and start watching your processes come in.
+Then setup and start watching your processes come in one place instead of 5 plus places!
 
-More docs soon...
+![watching](https://incomings.io/images/all_the_places.png)
+
+Docs below and at https://incomings.io/help
 
 ## Install
+
+Tested on Laravel 4.2 and 5.x more platforms to be tested soon.
 
 Composer install
 
@@ -24,7 +28,7 @@ Add to app.php
 
 Set in your .env
 
-INCOMINGS_URL=http://dev.incomings.io
+INCOMINGS_URL=http://post.incomings.io
 
 INCOMINGS_TOKEN=token_of_project
 
@@ -159,7 +163,7 @@ Then update your `.env.php` to have your tokens and url
 <?php
 
 return array(
-    'INCOMINGS_URL' => 'https://incomings.io',
+    'INCOMINGS_URL' => 'https://post.incomings.io',
     'INCOMINGS_TOKEN' => 'foo-bar-foo'
 );
 ~~~
