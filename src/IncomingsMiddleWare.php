@@ -35,7 +35,7 @@ class IncomingsMiddleWare extends BaseProvider {
         }
         catch(\Exception $e)
         {
-            Log::info(sprintf("Error getting Incomings %s", $e->getMessage()));
+            //Log::info(sprintf("Error getting Incomings %s", $e->getMessage()));
         }
 
 

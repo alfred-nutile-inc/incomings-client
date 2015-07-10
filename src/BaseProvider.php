@@ -85,7 +85,7 @@ abstract class BaseProvider {
         }
         catch(\Exception $e)
         {
-            Log::debug(sprintf("Error sending post to Incoming API %s", $e->getMessage()));
+            //Log::debug(sprintf("Error sending post to Incoming API %s", $e->getMessage()));
         }
 
     }

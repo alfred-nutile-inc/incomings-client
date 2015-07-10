@@ -195,6 +195,25 @@ Route::filter('incomings', function() {
 
 This will catch any issues and not mess up your application.
 
+### Curl
+
+Here is an example of using Curl. In this case I want to see some info from my server every hour.
+
+~~~
+curl -k -H "Content-Type: application/json" -H "Accept: application/json" -X POST --data @status.json https://post.incomings.io/incomings/f4ac705d-5087-3432-8182-334de6726fc5
+~~~
+
+Then every hour I get to see the updates to that file. The CronJob would run this as root
+
+~~~
+01 * * * * apt-get upgrade -s | grep -i security > /tmp/status.json
+03 * * * * curl -k -H "Content-Type: application/json" -H "Accept: application/json" -X POST --data @/tmp/status.json https://post.incomings.io/incomings/foobar
+~~~
+
+You can even make a bach command to run this all and gather more data like "Last Run" etc.
+
+
+
 
 ### Drupal 8
 
