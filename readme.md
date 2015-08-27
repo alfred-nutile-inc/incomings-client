@@ -217,8 +217,6 @@ Then every hour I get to see the updates to that file. The CronJob would run thi
 You can even make a bach command to run this all and gather more data like "Last Run" etc.
 
 
-
-
 ### Drupal 8
 
 Coming Soon...
@@ -226,3 +224,47 @@ Coming Soon...
 ### Drupal 7
 
 Coming Soon...
+
+
+### One Example Route showing the Usage
+
+~~~
+<?php
+
+use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
+use AlfredNutileInc\Incomings\Log;
+
+Route::get('/example_just_normal', function () {
+
+    $data = [
+        'title' => 'Normal Example',
+        'message' => "bar",
+    ];
+
+    Incomings::send($data);
+
+});
+
+Route::get('/example_log', function() {
+
+    $data = [
+        'title' => 'Log Example',
+        'message' => "bar",
+    ];
+
+    Log::info($data);
+
+    return "Log Example";
+});
+
+Route::get('/example_middle_ware', ['middleware' => 'incomings:My Custom Title MiddleWare Example', function() {
+
+    $data = [
+        'title' => 'MiddleWare Example',
+        'message' => "bar",
+    ];
+
+    return "Example MiddleWare";
+
+}]);
+~~~
