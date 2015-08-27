@@ -28,7 +28,7 @@ Add to app.php
 
 Set in your .env
 
-INCOMINGS_URL=http://post.incomings.io
+INCOMINGS_URL=https://post.incomings.io
 
 INCOMINGS_TOKEN=token_of_project
 
