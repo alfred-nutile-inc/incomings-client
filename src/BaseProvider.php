@@ -9,6 +9,8 @@
 namespace AlfredNutileInc\Incomings;
 
 
+use GuzzleHttp\Client;
+
 abstract class BaseProvider {
 
 
@@ -92,32 +94,20 @@ abstract class BaseProvider {
 
     protected function curl_post(array $options = array())
     {
-
-        $defaults = array(
-            CURLOPT_POST => 1,
-            CURLOPT_HEADER => 0,
-            CURLOPT_URL => $this->getFullUrl(),
-            CURLOPT_FRESH_CONNECT => 1,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_TIMEOUT => 5,
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_FORBID_REUSE => 1,
-            CURLOPT_POSTFIELDS => json_encode($this->getFullPayload(), JSON_PRETTY_PRINT)
-        );
-
-        $ch = curl_init();
-
-        curl_setopt_array($ch, ($options + $defaults));
-
-        if( ! $result = curl_exec($ch))
+        try
         {
-            trigger_error(curl_error($ch));
+            $client = new Client();
+
+            $response = $client->post($this->getFullUrl(), [
+                'body' => json_encode($this->getFullPayload(), JSON_PRETTY_PRINT)
+            ]);
+
+            return $response->getStatusCode();
         }
-
-        curl_close($ch);
-
-        return $result;
+        catch(\Exception $e)
+        {
+            //Nothing to do here
+        }
     }
 
     /**
