@@ -28,7 +28,7 @@ Add to app.php
 
 Set in your .env
 
-INCOMINGS_URL=https://post.incomings.io
+INCOMINGS_URL=http://post.incomings.io
 
 INCOMINGS_TOKEN=token_of_project
 
@@ -39,7 +39,7 @@ INCOMINGS_TOKEN=token_of_project
 
 This is the most simple helper. Each project gets one
 
-![url](https://dl.dropboxusercontent.com/s/z74jfb7hmia58bv/incomings_example.png?dl=0)
+![url](https://dl.dropboxusercontent.com/s/7tw1cgu5wvlgz10/Screenshot%202015-06-25%2019.22.04.png?dl=0)
 
 So you can for example use that on Iron.io as a PUSH queue route since you can have more than one.
 
@@ -151,6 +151,57 @@ Route::get('foobar', ['middleware' => 'incomings:My Title', function() {
 }]);
 ~~~
 
+### Laravel Exceptions
+
+Just edit your `app/Exceptions/Handler.php` so it uses Incomings Exception handler
+
+ Before
+
+```php
+     <?php
+
+     namespace App\Exceptions;
+
+     use Exception;
+     use Symfony\Component\HttpKernel\Exception\HttpException;
+     use IncomingsExceptionHandler as ExceptionHandler;
+
+     class Handler extends ExceptionHandler
+     {
+
+```
+
+ After
+
+```php
+    <?php
+
+    namespace App\Exceptions;
+
+    use Exception;
+    use Symfony\Component\HttpKernel\Exception\HttpException;
+    use AlfredNutileInc\Incomings\IncomingsExceptionHandler as ExceptionHandler;
+
+    class Handler extends ExceptionHandler
+    {
+```
+
+Then as seen in this route it will send a message first to Incomings.io
+
+```php
+
+Route::get('/example_exception', function() {
+
+    throw new \Exception("Yo Incomings!!!");
+
+});
+```
+
+Will send a message like
+
+
+
+
 ### Filter for Laravel 4.2
 
 As above plug in your provider
@@ -199,6 +250,8 @@ Route::filter('incomings', function() {
 
 This will catch any issues and not mess up your application.
 
+![incomings](https://dl.dropboxusercontent.com/s/qg0x11cxs9qjtr5/incomings_exception.png?dl=0)
+
 ### Curl
 
 Here is an example of using Curl. In this case I want to see some info from my server every hour.
@@ -217,6 +270,8 @@ Then every hour I get to see the updates to that file. The CronJob would run thi
 You can even make a bach command to run this all and gather more data like "Last Run" etc.
 
 
+
+
 ### Drupal 8
 
 Coming Soon...
@@ -224,47 +279,3 @@ Coming Soon...
 ### Drupal 7
 
 Coming Soon...
-
-
-### One Example Route showing the Usage
-
-~~~
-<?php
-
-use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
-use AlfredNutileInc\Incomings\Log;
-
-Route::get('/example_just_normal', function () {
-
-    $data = [
-        'title' => 'Normal Example',
-        'message' => "bar",
-    ];
-
-    Incomings::send($data);
-
-});
-
-Route::get('/example_log', function() {
-
-    $data = [
-        'title' => 'Log Example',
-        'message' => "bar",
-    ];
-
-    Log::info($data);
-
-    return "Log Example";
-});
-
-Route::get('/example_middle_ware', ['middleware' => 'incomings:My Custom Title MiddleWare Example', function() {
-
-    $data = [
-        'title' => 'MiddleWare Example',
-        'message' => "bar",
-    ];
-
-    return "Example MiddleWare";
-
-}]);
-~~~
