@@ -200,7 +200,7 @@ Route::get('/example_exception', function() {
 Will send a message like
 
 
-
+![](https://dl.dropboxusercontent.com/s/qg0x11cxs9qjtr5/incomings_exception.png?dl=0)
 
 ### Filter for Laravel 4.2
 
