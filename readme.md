@@ -199,8 +199,46 @@ Route::get('/example_exception', function() {
 
 Will send a message like
 
-
 ![](https://dl.dropboxusercontent.com/s/qg0x11cxs9qjtr5/incomings_exception.png?dl=0)
+
+
+### Bugsnag Too
+
+If you are using a service like BugSnag just follow their directions so your `app/Exceptions/Handler.php` would then look like this.
+
+```php
+<?php namespace App\Exceptions;
+
+use Exception;
+use Bugsnag\BugsnagLaravel\BugsnagExceptionHandler as ExceptionHandler;
+use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
+
+class Handler extends ExceptionHandler
+{
+
+    protected $dontReport = [
+        HttpException::class,
+    ];
+
+    public function report(Exception $e)
+    {
+        $data = [
+            'title' => 'Application Exception Error',
+            'message' => sprintf(
+                "Error Filename %s \n on line %d \n with message %s \n with Code %s",
+                $e->getFile(),
+                $e->getLine(),
+                $e->getMessage(),
+                $e->getCode()
+            ),
+        ];
+        Incomings::send($data);
+        
+        return parent::report($e);
+    }
+
+}
+```
 
 ### Filter for Laravel 4.2
 
