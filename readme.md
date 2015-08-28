@@ -1,6 +1,6 @@
 # Laravel and Non-Laravel Library To Connect to Incomings.io Service
 
-![logo](https://dl.dropboxusercontent.com/s/fz0zwwsxawlyj8t/logo_wide.jpeg?dl=0)
+![logo](https://incomings.io/images/logo_wide.jpeg)
 
 Sign up for the service https://incomings.io
 
