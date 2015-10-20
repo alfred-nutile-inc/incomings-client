@@ -26,6 +26,22 @@ Add to app.php
 'AlfredNutileInc\Incomings\IncomingsServiceProvider',
 ~~~
 
+NOTE: If you are using Lumen, instead of the above you need to enable the provider in bootstrap/app.php like this:
+~~~
+/*
+|--------------------------------------------------------------------------
+| Register Service Providers
+|--------------------------------------------------------------------------
+|
+| Here we will register all of the application's service providers which
+| are used to bind services into the container. Service providers are
+| totally optional, so you are not required to uncomment this line.
+|
+*/
+
+$app->register('AlfredNutileInc\Incomings\IncomingsServiceProvider');
+~~~
+
 Set in your .env
 
 INCOMINGS_URL=https://post.incomings.io
@@ -72,6 +88,7 @@ For the above Facade to work you might have to add
 ~~~
 use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
 ~~~
+NOTE: If you're using Lumen, make sure to enable facades in bootstrap/app.php with `$app->withFacades();`
 
 ### Logger
 
@@ -185,6 +202,20 @@ Just edit your `app/Exceptions/Handler.php` so it uses Incomings Exception handl
     class Handler extends ExceptionHandler
     {
 ```
+If you are using Lumen, you will need to use the `IncomingsExceptionHandlerForLumen` instead, like so:
+```php
+    <?php
+
+    namespace App\Exceptions;
+
+    use Exception;
+    use Symfony\Component\HttpKernel\Exception\HttpException;
+    use AlfredNutileInc\Incomings\IncomingsExceptionHandlerForLumen as ExceptionHandler;
+
+    class Handler extends ExceptionHandler
+    {
+```
+
 
 Then as seen in this route it will send a message first to Incomings.io
 
