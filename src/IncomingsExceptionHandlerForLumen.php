@@ -1,7 +1,7 @@
 <?php namespace AlfredNutileInc\Incomings;
 
 use Exception;
-use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
 
 class IncomingsExceptionHandler extends ExceptionHandler {
