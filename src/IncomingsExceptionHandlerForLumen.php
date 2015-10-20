@@ -4,7 +4,7 @@ use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
 
-class IncomingsExceptionHandler extends ExceptionHandler {
+class IncomingsExceptionHandlerForLumen extends ExceptionHandler {
 
     /**
      * Code / Idea from BugSnag
