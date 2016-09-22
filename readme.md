@@ -17,7 +17,7 @@ Tested on Laravel 4.2 and 5.x more platforms to be tested soon.
 Composer install
 
 ~~~
-composer require alfred-nutile-inc/incomings-client
+composer require alfred-nutile-inc/incomings-client:dev-master
 ~~~
 
 Add to app.php
