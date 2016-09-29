@@ -100,7 +100,7 @@ For example I can register with my `AppServiceProvider`
             $message = sprintf("Connection %s, Job %s, Exception %s %s %s",
                     $event->connectionName, printf($event->data, 1), $event->job->getRawBody()
                 );
-            $data = ['title' => 'Failed Queue From OpenSight', 'message' =>
+            $data = ['title' => 'Failed Queue From FooBar', 'message' =>
 
                 $message
             ];
