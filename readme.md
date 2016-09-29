@@ -96,13 +96,14 @@ Also see Laravel Docs for failed Queue [https://laravel.com/docs/5.2/queues](htt
 For example I can register with my `AppServiceProvider`
 
 ```
+
         Queue::failing(function (JobFailed $event) {
             $message = sprintf("Connection %s, Job %s, Exception %s %s %s",
-                    $event->connectionName, printf($event->data, 1), $event->job->getRawBody()
+                    $event->connectionName, implode("\n", $event->data), $event->job->getRawBody()
                 );
             $data = ['title' => 'Failed Queue From FooBar', 'message' =>
 
-                $message
+                json_encode($message, JSON_PRETTY_PRINT)
             ];
 
             Incomings::send($data);
