@@ -90,6 +90,24 @@ use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
 ~~~
 NOTE: If you're using Lumen, make sure to enable facades in bootstrap/app.php with `$app->withFacades();`
 
+
+Also see Laravel Docs for failed Queue [https://laravel.com/docs/5.2/queues](https://laravel.com/docs/5.2/queues)
+
+For example I can register with my `AppServiceProvider`
+
+```
+        Queue::failing(function (JobFailed $event) {
+            $message = sprintf("Connection %s, Job %s, Exception %s %s %s",
+                    $event->connectionName, printf($event->data, 1), $event->job->getRawBody()
+                );
+            $data = ['title' => 'Failed Queue From OpenSight', 'message' =>
+
+                $message
+            ];
+
+            Incomings::send($data);
+        });
+```
 ### Logger
 
 This setup will allow you to use Log::info("Some Message") and all the other Log methods as normal.
