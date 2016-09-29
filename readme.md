@@ -44,10 +44,12 @@ $app->register('AlfredNutileInc\Incomings\IncomingsServiceProvider');
 
 Set in your .env
 
+```
 INCOMINGS_URL=https://post.incomings.io
 
 INCOMINGS_TOKEN=token_of_project
 
+```
 
 ## Send Data to the Service
 
