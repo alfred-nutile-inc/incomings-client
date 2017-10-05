@@ -24,6 +24,11 @@ abstract class BaseProvider {
 
     protected $full_payload = [];
 
+    /**
+     * @var \GuzzleHttp\Client
+     */
+    protected $client;
+
     public function send($data = [])
     {
         if(!getenv('INCOMINGS_TOKEN'))
@@ -96,7 +101,7 @@ abstract class BaseProvider {
     {
         try
         {
-            $client = new Client();
+            $client = $this->getClient();
 
             $response = $client->post($this->getFullUrl(), [
                 'body' => json_encode($this->getFullPayload(), JSON_PRETTY_PRINT)
@@ -184,6 +189,25 @@ abstract class BaseProvider {
         {
             $this->inCleaner($key);
         }
+    }
+
+    public function getClient()
+    {
+        if(!$this->client) {
+            $this->setClient();
+        }
+
+        return $this->client;
+
+    }
+
+    public function setClient($client = nul)
+    {
+        if(!$client) {
+            $client = new Client();
+        }
+
+        $this->client = $client;
     }
 
 }
