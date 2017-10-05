@@ -1,4 +1,4 @@
-vv1.0.1
+v1.0.1
 -----
 Fix the way the Guzzle client is set so it is easier to swap out for
 Mockery when testing

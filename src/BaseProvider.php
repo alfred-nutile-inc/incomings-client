@@ -201,7 +201,7 @@ abstract class BaseProvider {
 
     }
 
-    public function setClient($client = nul)
+    public function setClient($client = null)
     {
         if(!$client) {
             $client = new Client();
