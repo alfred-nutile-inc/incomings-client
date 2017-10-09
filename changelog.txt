@@ -1,3 +1,20 @@
+## v1.0.2 - 2017-10-09
+
+### Added
+- Allow the provider to be mocked if we are testing
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Allow the provider to be mocked if we are testing
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
+
 v1.0.1
 -----
 Fix the way the Guzzle client is set so it is easier to swap out for
