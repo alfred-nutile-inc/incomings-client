@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alfrednutile
- * Date: 7/4/15
- * Time: 6:24 AM
- */
+namespace AlfredNutileInc\Incomings\Tests;
 
 use Mockery as m;
 
-class IncomingsLoggerTest extends \TestCase {
+class IncomingsLoggerTest extends TestCase
+{
 
     /**
      * @test
@@ -58,7 +54,6 @@ class IncomingsLoggerTest extends \TestCase {
         $this->assertEquals('[INFO] Using Incomings Logger!', $incoming->getDataIncomings()['title']);
         $this->assertEquals('Normal Log Message', $incoming->getDataIncomings()['message']);
         $this->assertEquals('Normal Log Message', $incoming->getDataLogger());
-
     }
 
     public function tearDown()
@@ -66,5 +61,4 @@ class IncomingsLoggerTest extends \TestCase {
         parent::tearDown();
         m::close();
     }
-
 }

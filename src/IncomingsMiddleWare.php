@@ -8,12 +8,12 @@
 
 namespace AlfredNutileInc\Incomings;
 
-
 use Closure;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 
-class IncomingsMiddleWare extends BaseProvider {
+class IncomingsMiddleWare extends BaseProvider
+{
 
     use RequestTrait;
 
@@ -29,12 +29,9 @@ class IncomingsMiddleWare extends BaseProvider {
     {
         $this->title = $title;
 
-        try
-        {
+        try {
             $this->handleIncomings($request, $next);
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             //Log::info(sprintf("Error getting Incomings %s", $e->getMessage()));
         }
 
@@ -51,7 +48,6 @@ class IncomingsMiddleWare extends BaseProvider {
         $data['message']    = $this->makeMessage($request, $next);
 
         $this->send($data);
-
     }
 
 
@@ -59,8 +55,7 @@ class IncomingsMiddleWare extends BaseProvider {
     private function makeTitleFromResponse($request, $response)
     {
 
-        if(!$this->title)
-        {
+        if (!$this->title) {
             $this->title = sprintf(" of status %s from IP %s", $response->getStatusCode(), $request->ip());
         }
 
@@ -96,6 +91,5 @@ class IncomingsMiddleWare extends BaseProvider {
         $data['message']    = $this->makeMessageFromResponse($response);
 
         $this->send($data);
-
     }
 }

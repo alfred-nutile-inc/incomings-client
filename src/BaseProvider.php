@@ -8,10 +8,10 @@
 
 namespace AlfredNutileInc\Incomings;
 
-
 use GuzzleHttp\Client;
 
-abstract class BaseProvider {
+abstract class BaseProvider
+{
 
 
     protected $clean_out = ['PASS', 'KEY', 'SECRET', 'LS_COLORS', 'TOKEN'];
@@ -31,8 +31,9 @@ abstract class BaseProvider {
 
     public function send($data = [])
     {
-        if(!getenv('INCOMINGS_TOKEN'))
+        if (!getenv('INCOMINGS_TOKEN')) {
             return true;
+        }
 
         $this->getAndSetServer();
         $this->setPayload($data);
@@ -49,8 +50,9 @@ abstract class BaseProvider {
 
     public function getServerName()
     {
-        if(isset($_SERVER['SERVER_NAME']))
+        if (isset($_SERVER['SERVER_NAME'])) {
             return $_SERVER['SERVER_NAME'];
+        }
 
         return false;
     }
@@ -67,10 +69,8 @@ abstract class BaseProvider {
 
     private function inCleaner($key)
     {
-        foreach($this->clean_out as $item)
-        {
-            if(stripos($key, $item) !== false)
-            {
+        foreach ($this->clean_out as $item) {
+            if (stripos($key, $item) !== false) {
                 unset($this->server[$key]);
             }
         }
@@ -80,27 +80,26 @@ abstract class BaseProvider {
 
     public function sendFullPayload($full_payload)
     {
-        try
-        {
+        try {
             $this->setToken();
             $this->setUrl();
             $this->setFullPayload($full_payload);
-            if($this->token == false)
+            if ($this->token == false) {
                 throw new \Exception("Missing your Project TOKEN see readme.md for help");
+            }
 
             $this->curl_post();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             //Log::debug(sprintf("Error sending post to Incoming API %s", $e->getMessage()));
         }
-
     }
 
+    //@codingStandardsIgnoreStart
     protected function curl_post(array $options = array())
     {
-        try
-        {
+        //@codingStandardsIgnoreEnd
+
+        try {
             $client = $this->getClient();
 
             $response = $client->post($this->getFullUrl(), [
@@ -108,9 +107,7 @@ abstract class BaseProvider {
             ]);
 
             return $response->getStatusCode();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             //Nothing to do here
         }
     }
@@ -133,8 +130,9 @@ abstract class BaseProvider {
 
     public function setUrl($url = false)
     {
-        if($url == false)
+        if ($url == false) {
             $url = getenv('INCOMINGS_URL');
+        }
         $this->url = $url;
     }
 
@@ -148,8 +146,9 @@ abstract class BaseProvider {
 
     public function setToken($token = false)
     {
-        if($token == false)
+        if ($token == false) {
             $token = getenv('INCOMINGS_TOKEN');
+        }
 
         $this->token = $token;
 
@@ -185,29 +184,26 @@ abstract class BaseProvider {
 
     public function transformServer()
     {
-        foreach($this->server as $key => $value)
-        {
+        foreach ($this->server as $key => $value) {
             $this->inCleaner($key);
         }
     }
 
     public function getClient()
     {
-        if(!$this->client) {
+        if (!$this->client) {
             $this->setClient();
         }
 
         return $this->client;
-
     }
 
     public function setClient($client = null)
     {
-        if(!$client) {
+        if (!$client) {
             $client = new Client();
         }
 
         $this->client = $client;
     }
-
 }

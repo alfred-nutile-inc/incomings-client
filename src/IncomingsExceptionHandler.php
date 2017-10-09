@@ -4,7 +4,8 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
 
-class IncomingsExceptionHandler extends ExceptionHandler {
+class IncomingsExceptionHandler extends ExceptionHandler
+{
 
     /**
      * Code / Idea from BugSnag
@@ -27,5 +28,4 @@ class IncomingsExceptionHandler extends ExceptionHandler {
 
         return parent::report($e);
     }
-
 }

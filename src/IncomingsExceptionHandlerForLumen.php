@@ -4,7 +4,8 @@ use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use AlfredNutileInc\Incomings\IncomingsFacade as Incomings;
 
-class IncomingsExceptionHandlerForLumen extends ExceptionHandler {
+class IncomingsExceptionHandlerForLumen extends ExceptionHandler
+{
 
     /**
      * Code / Idea from BugSnag
@@ -27,5 +28,4 @@ class IncomingsExceptionHandlerForLumen extends ExceptionHandler {
 
         return parent::report($e);
     }
-
 }

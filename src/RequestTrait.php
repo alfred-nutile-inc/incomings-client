@@ -8,8 +8,8 @@
 
 namespace AlfredNutileInc\Incomings;
 
-
-trait RequestTrait {
+trait RequestTrait
+{
 
     public $title;
 
@@ -31,12 +31,10 @@ trait RequestTrait {
     public function makeTitle($request)
     {
 
-        if(!$this->title)
-        {
+        if (!$this->title) {
             $this->title = sprintf(" IP %s Method %s URL %s", $request->ip(), $request->method(), $request->fullUrl());
         }
 
         return $this->title;
     }
-
 }

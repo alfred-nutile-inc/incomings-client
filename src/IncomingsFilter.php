@@ -8,8 +8,8 @@
 
 namespace AlfredNutileInc\Incomings;
 
-
-class IncomingsFilter extends BaseProvider {
+class IncomingsFilter extends BaseProvider
+{
 
     use RequestTrait;
 
@@ -23,6 +23,5 @@ class IncomingsFilter extends BaseProvider {
         $data['message']    = json_encode($message, JSON_PRETTY_PRINT);
 
         $this->send($data);
-
     }
 }

@@ -10,7 +10,8 @@ namespace AlfredNutileInc\Incomings;
 
 use Illuminate\Log\Writer;
 
-class IncomingsLoggerProvider extends BaseProvider {
+class IncomingsLoggerProvider extends BaseProvider
+{
 
     /**
      * @var Writer
@@ -37,8 +38,6 @@ class IncomingsLoggerProvider extends BaseProvider {
     {
         $this->prepForIncomings($data, $level);
         $this->prepForLogger($data);
-
-
     }
 
     public function debug($data)
@@ -118,13 +117,11 @@ class IncomingsLoggerProvider extends BaseProvider {
     private function prepForIncomings($data, $level = 'info')
     {
 
-        if(!is_array($data))
-        {
+        if (!is_array($data)) {
             $this->data_incomings['message']    = $data;
-            $this->data_incomings['title']      = sprintf("[%s] %s", strtoupper($level), "Message from Incomings Logger");
-        }
-        else
-        {
+            $this->data_incomings['title']      =
+                sprintf("[%s] %s", strtoupper($level), "Message from Incomings Logger");
+        } else {
             $this->data_incomings = $data;
 
             $this->prefixIncomingsTitle($level);
@@ -136,11 +133,11 @@ class IncomingsLoggerProvider extends BaseProvider {
 
     private function prepForLogger($data)
     {
-        if(is_array($data) && isset($data['message']))
+        if (is_array($data) && isset($data['message'])) {
             $this->data_logger = $data['message'];
-        else
+        } else {
             $this->data_logger = print_r($data, 1);
-
+        }
     }
 
     /**
@@ -177,14 +174,10 @@ class IncomingsLoggerProvider extends BaseProvider {
 
     private function prefixIncomingsTitle($level)
     {
-        if(isset($this->data_incomings['title']))
-        {
+        if (isset($this->data_incomings['title'])) {
             $this->data_incomings['title'] = sprintf("[%s] %s", strtoupper($level), $this->data_incomings['title']);
-        }
-        else
-        {
+        } else {
             $this->data_incomings['title'] = sprintf("[%s] %s", strtoupper($level), "Message from Incomings Logger");
         }
     }
-
 }
