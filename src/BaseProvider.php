@@ -108,7 +108,6 @@ abstract class BaseProvider
         } catch (\Exception $e) {
             //Nothing to do here
             //@TODO log no response but use file logger
-            dd($e->getMessage());
         }
     }
 

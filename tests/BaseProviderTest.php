@@ -3,6 +3,9 @@ namespace AlfredNutileInc\Incomings\Tests;
 
 use AlfredNutileInc\Incomings\IncomingsProvider;
 use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use Mockery as m;
 
 class BaseProviderTest extends TestCase
@@ -24,14 +27,19 @@ class BaseProviderTest extends TestCase
      */
     public function should_have_env_and_try_to_post()
     {
-        $this->markTestIncomplete("Fixing other bug");
-        $client = m::mock(Client::class)
-            ->shouldReceive('post')->once()
-            ->andReturn([]);
+        $mock = new MockHandler([
+            new Response(202, ['Content-Length' => 0]),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
         putenv("INCOMINGS_TOKEN=true");
         $base = new IncomingsProvider();
         $base->setClient($client);
         $base->send([]);
+
+        $this->assertEquals(0, $mock->count());
     }
 
     public function tearDown()
