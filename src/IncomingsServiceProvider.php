@@ -37,7 +37,6 @@ class IncomingsServiceProvider extends ServiceProvider
             $incomingsLogger->setLogger(new LogManager($app));
             return $incomingsLogger;
         });
-
     }
 
     public function providers()
