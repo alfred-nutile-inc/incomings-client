@@ -8,9 +8,11 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Log\LogManager;
 
 class IncomingsServiceProvider extends ServiceProvider
 {
+
     public function register()
     {
         $this->app->singleton('incomings', function ($app) {
@@ -28,6 +30,12 @@ class IncomingsServiceProvider extends ServiceProvider
             }
 
             return new IncomingsProvider();
+        });
+
+        $this->app->singleton('incomings_logger', function ($app) {
+            $incomingsLogger = new IncomingsLoggerProvider();
+            $incomingsLogger->setLogger(new LogManager($app));
+            return $incomingsLogger;
         });
     }
 

@@ -31,7 +31,7 @@ abstract class BaseProvider
 
     public function send($data = [])
     {
-        if (!getenv('INCOMINGS_TOKEN')) {
+        if (!env('INCOMINGS_TOKEN')) {
             return true;
         }
 
@@ -90,6 +90,7 @@ abstract class BaseProvider
 
             $this->curl_post();
         } catch (\Exception $e) {
+            //@TODO must use direct log bypass incomings else loops here
             //Log::debug(sprintf("Error sending post to Incoming API %s", $e->getMessage()));
         }
     }
@@ -98,17 +99,15 @@ abstract class BaseProvider
     protected function curl_post(array $options = array())
     {
         //@codingStandardsIgnoreEnd
-
         try {
-            $client = $this->getClient();
-
-            $response = $client->post($this->getFullUrl(), [
+            $response = $this->getClient()->post($this->getFullUrl(), [
                 'body' => json_encode($this->getFullPayload(), JSON_PRETTY_PRINT)
             ]);
 
             return $response->getStatusCode();
         } catch (\Exception $e) {
             //Nothing to do here
+            //@TODO log no response but use file logger
         }
     }
 
