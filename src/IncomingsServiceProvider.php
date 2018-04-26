@@ -2,6 +2,7 @@
 
 namespace AlfredNutileInc\Incomings;
 
+use Monolog\Logger;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;

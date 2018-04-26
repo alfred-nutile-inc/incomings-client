@@ -5,7 +5,7 @@ namespace AlfredNutileInc\Incomings;
 use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 
-class IncomingsHandler extends AbstractProcessingHandler
+class IncomingsMonologHandler extends AbstractProcessingHandler
 {
     /**
      * @var AlfredNutileInc\Incomings\IncomingsLoggerProvider
