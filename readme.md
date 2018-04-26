@@ -23,7 +23,7 @@ Tested on Laravel 4.2 and 5.x more platforms to be tested soon.
 Composer install
 
 ~~~
-composer require alfred-nutile-inc/incomings-client:">=1.0"
+composer require alfred-nutile-inc/incomings-client:">=2.0"
 ~~~
 
 Add to app.php
