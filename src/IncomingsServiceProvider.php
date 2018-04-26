@@ -1,18 +1,20 @@
-<?php namespace AlfredNutileInc\Incomings;
+<?php
 
-use AlfredNutileInc\Incomings\IncomingsLoggerProvider;
-use AlfredNutileInc\Incomings\IncomingsProvider;
+namespace AlfredNutileInc\Incomings;
+
 use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Log\LogManager;
+use GuzzleHttp\Handler\MockHandler;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Log\LogManager;
+use AlfredNutileInc\Incomings\IncomingsProvider;
+use AlfredNutileInc\Incomings\IncomingsLoggerProvider;
+use AlfredNutileInc\Incomings\IncomingsMonologHandler;
 
 class IncomingsServiceProvider extends ServiceProvider
 {
-
     public function register()
     {
         $this->app->singleton('incomings', function ($app) {
@@ -34,9 +36,16 @@ class IncomingsServiceProvider extends ServiceProvider
 
         $this->app->singleton('incomings_logger', function ($app) {
             $incomingsLogger = new IncomingsLoggerProvider();
-            $incomingsLogger->setLogger(new LogManager($app));
             return $incomingsLogger;
         });
+
+        if ($this->app['log'] instanceof LogManager) {
+            $this->app['log']->extend('incomings', function ($app, $config) {
+                $logger = new Logger('incomings');
+                $logger->pushHandler(new IncomingsMonologHandler());
+                return $logger;
+            });
+        }
     }
 
     public function providers()
