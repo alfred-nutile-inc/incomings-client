@@ -12,27 +12,9 @@ use Illuminate\Log\Writer;
 
 class IncomingsLoggerProvider extends BaseProvider
 {
-
-    /**
-     * @var Writer
-     */
-    protected $logger;
-
     protected $data_logger;
 
     protected $data_incomings;
-
-    public function setLogger($logger)
-    {
-        $this->logger = $logger;
-
-        return $this;
-    }
-
-    public function getLogger()
-    {
-        return $this->logger;
-    }
 
     public function prepData($data, $level = 'info')
     {
@@ -45,8 +27,6 @@ class IncomingsLoggerProvider extends BaseProvider
         $this->prepData($data, 'debug');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->debug($this->data_logger);
     }
 
     public function notice($data)
@@ -54,8 +34,6 @@ class IncomingsLoggerProvider extends BaseProvider
         $this->prepData($data, 'notice');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->notice($this->data_logger);
     }
 
     public function warning($data)
@@ -63,8 +41,6 @@ class IncomingsLoggerProvider extends BaseProvider
         $this->prepData($data, 'warning');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->warning($this->data_logger);
     }
 
     public function info($data)
@@ -72,28 +48,20 @@ class IncomingsLoggerProvider extends BaseProvider
         $this->prepData($data, 'info');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->info($this->data_logger);
     }
-
 
     public function alert($data)
     {
         $this->prepData($data, 'alert');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->alert($this->data_logger);
     }
-
 
     public function emergency($data)
     {
         $this->prepData($data, 'emergency');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->emergency($this->data_logger);
     }
 
     public function error($data)
@@ -101,8 +69,6 @@ class IncomingsLoggerProvider extends BaseProvider
         $this->prepData($data, 'error');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->error($this->data_logger);
     }
 
     public function critical($data)
@@ -110,14 +76,11 @@ class IncomingsLoggerProvider extends BaseProvider
         $this->prepData($data, 'critical');
 
         $this->send($this->data_incomings);
-
-        $this->getLogger()->critical($this->data_logger);
     }
 
     private function prepForIncomings($data, $level = 'info')
     {
-
-        if (!is_array($data)) {
+        if (! is_array($data)) {
             $this->data_incomings['message']    = $data;
             $this->data_incomings['title']      =
                 sprintf("[%s] %s", strtoupper($level), "Message from Incomings Logger");
@@ -126,7 +89,6 @@ class IncomingsLoggerProvider extends BaseProvider
 
             $this->prefixIncomingsTitle($level);
         }
-
 
         return $this;
     }
