@@ -1,24 +1,18 @@
 <?php
+
 namespace AlfredNutileInc\Incomings\Tests;
 
 use Mockery as m;
 
 class IncomingsLoggerTest extends TestCase
 {
-
     /**
      * @test
      */
     public function should_make_incomings_array_from_string_message_and_leave_log_alone()
     {
-
-        $logger = m::mock();
-
-        $logger->shouldReceive('info');
-
         $incoming = m::mock('\AlfredNutileInc\Incomings\IncomingsLoggerProvider')->makePartial();
         $incoming->shouldReceive('send');
-        $incoming->setLogger($logger);
 
         $message = "Normal Log Message";
 
@@ -35,14 +29,8 @@ class IncomingsLoggerTest extends TestCase
      */
     public function should_handle_user_using_array_to_logger()
     {
-
-        $logger = m::mock();
-
-        $logger->shouldReceive('info');
-
         $incoming = m::mock('\AlfredNutileInc\Incomings\IncomingsLoggerProvider')->makePartial();
         $incoming->shouldReceive('send');
-        $incoming->setLogger($logger);
 
         $message = [
             'title' => "Using Incomings Logger!",

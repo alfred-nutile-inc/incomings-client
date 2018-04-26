@@ -57,6 +57,25 @@ INCOMINGS_TOKEN=token_of_project
 
 ```
 
+### Laravel 5.6
+
+Add the `incomings` log channel to your `config/logging.php` file:
+
+```
+'channels' => [
+    'stack' => [
+        'driver' => 'stack',
+        // Add incomings to the stack:
+        'channels' => ['single', 'incomings'],
+    ],
+
+    'incomings' => [
+        'driver' => 'incomings',
+        'level' => 'debug',
+    ],
+],
+```
+
 ## Send Data to the Service
 
 ### URL
@@ -292,7 +311,7 @@ class Handler extends ExceptionHandler
             ),
         ];
         Incomings::send($data);
-        
+
         return parent::report($e);
     }
 
@@ -393,4 +412,3 @@ Coming Soon...
 [link-downloads]: https://packagist.org/packages/alfred-nutile-inc/incomings-client
 [link-author]: https://github.com/alnutile
 [link-contributors]: ../../contributors
-
