@@ -16,6 +16,17 @@ use AlfredNutileInc\Incomings\IncomingsMonologHandler;
 
 class IncomingsServiceProvider extends ServiceProvider
 {
+    public function boot()
+    {
+        if ($this->app['log'] instanceof LogManager) {
+            $this->app['log']->extend('incomings', function ($app, $config) {
+                $logger = new Logger('incomings');
+                $logger->pushHandler(new IncomingsMonologHandler());
+                return $logger;
+            });
+        }
+    }
+
     public function register()
     {
         $this->app->singleton('incomings', function ($app) {
@@ -39,14 +50,6 @@ class IncomingsServiceProvider extends ServiceProvider
             $incomingsLogger = new IncomingsLoggerProvider();
             return $incomingsLogger;
         });
-
-        if ($this->app['log'] instanceof LogManager) {
-            $this->app['log']->extend('incomings', function ($app, $config) {
-                $logger = new Logger('incomings');
-                $logger->pushHandler(new IncomingsMonologHandler());
-                return $logger;
-            });
-        }
     }
 
     public function providers()
