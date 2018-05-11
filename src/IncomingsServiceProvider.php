@@ -29,6 +29,11 @@ class IncomingsServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '../incomings.php',
+            'incomings'
+        );
+
         $this->app->singleton('incomings', function ($app) {
             if ($app->environment(['testing'])) {
                 $mock = new MockHandler([

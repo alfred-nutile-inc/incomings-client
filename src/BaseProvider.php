@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: alfrednutile
@@ -31,7 +32,7 @@ abstract class BaseProvider
 
     public function send($data = [])
     {
-        if (!env('INCOMINGS_TOKEN')) {
+        if (!config('incomings.token')) {
             return true;
         }
 
@@ -41,7 +42,7 @@ abstract class BaseProvider
         $this->sendFullPayload([
             'headers' => [],
             'payload' => $this->getPayload(),
-            'server'  => $this->getServer()
+            'server' => $this->getServer()
         ]);
 
 
@@ -130,7 +131,7 @@ abstract class BaseProvider
     public function setUrl($url = false)
     {
         if ($url == false) {
-            $url = getenv('INCOMINGS_URL');
+            $url = config('incomings.url');
         }
         $this->url = $url;
     }
