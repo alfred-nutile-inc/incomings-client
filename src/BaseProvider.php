@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: alfrednutile
@@ -31,7 +32,7 @@ abstract class BaseProvider
 
     public function send($data = [])
     {
-        if (!env('INCOMINGS_TOKEN')) {
+        if (!config('incomings.token')) {
             return true;
         }
 
@@ -41,7 +42,7 @@ abstract class BaseProvider
         $this->sendFullPayload([
             'headers' => [],
             'payload' => $this->getPayload(),
-            'server'  => $this->getServer()
+            'server' => $this->getServer()
         ]);
 
 
@@ -84,6 +85,7 @@ abstract class BaseProvider
             $this->setToken();
             $this->setUrl();
             $this->setFullPayload($full_payload);
+
             if ($this->token == false) {
                 throw new \Exception("Missing your Project TOKEN see readme.md for help");
             }
@@ -130,7 +132,7 @@ abstract class BaseProvider
     public function setUrl($url = false)
     {
         if ($url == false) {
-            $url = getenv('INCOMINGS_URL');
+            $url = config('incomings.url');
         }
         $this->url = $url;
     }
@@ -146,7 +148,7 @@ abstract class BaseProvider
     public function setToken($token = false)
     {
         if ($token == false) {
-            $token = getenv('INCOMINGS_TOKEN');
+            $token = config("incomings.token");
         }
 
         $this->token = $token;
