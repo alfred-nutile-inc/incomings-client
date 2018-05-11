@@ -34,7 +34,8 @@ class BaseProviderTest extends TestCase
         $handler = HandlerStack::create($mock);
         $client = new Client(['handler' => $handler]);
 
-        putenv("INCOMINGS_TOKEN=true");
+        config(["incomings.token" => true]);
+        config(["incomings.url" => "http://localhost/incomings"]);
         $base = new IncomingsProvider();
         $base->setClient($client);
         $base->send([]);

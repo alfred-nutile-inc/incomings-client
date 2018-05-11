@@ -85,6 +85,7 @@ abstract class BaseProvider
             $this->setToken();
             $this->setUrl();
             $this->setFullPayload($full_payload);
+
             if ($this->token == false) {
                 throw new \Exception("Missing your Project TOKEN see readme.md for help");
             }
@@ -147,7 +148,7 @@ abstract class BaseProvider
     public function setToken($token = false)
     {
         if ($token == false) {
-            $token = getenv('INCOMINGS_TOKEN');
+            $token = config("incomings.token");
         }
 
         $this->token = $token;

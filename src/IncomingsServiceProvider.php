@@ -30,7 +30,7 @@ class IncomingsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '../incomings.php',
+            __DIR__ . '/../incomings.php',
             'incomings'
         );
 
