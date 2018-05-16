@@ -2,5 +2,5 @@
 
 return [
     'token' => env('INCOMINGS_TOKEN'),
-    'url' => env('INCOMINGS_URL', 'htts://incomings.io')
+    'url' => env('INCOMINGS_URL', 'https://incomings.io')
 ];
