@@ -202,7 +202,11 @@ abstract class BaseProvider
     public function setClient($client = null)
     {
         if (!$client) {
-            $client = new Client();
+            $options = [];
+            if (config("app.env") == 'local') {
+                $options['verify'] = false;
+            }
+            $client = new Client($options);
         }
 
         $this->client = $client;
