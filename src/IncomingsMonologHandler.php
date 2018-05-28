@@ -39,6 +39,13 @@ class IncomingsMonologHandler extends AbstractProcessingHandler
     protected function send($data)
     {
         $level = strtolower($data['level_name']);
-        $this->incomings->$level($data['message']);
+
+        if ($this->getFormatter()) {
+            return $this->incomings->$level(
+                $this->getFormatter()->format($data)
+            );
+        }
+
+        return $this->incomings->$level($data['message']);
     }
 }
